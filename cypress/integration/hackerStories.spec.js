@@ -148,7 +148,7 @@ describe('Hacker Stories', () => {
           .should('be.visible')
       })
 
-      it.only('types and clicks the submit button', () => {
+      it('types and clicks the submit button', () => {
         cy.get('#search')
           .type(newTerm)
         cy.contains('Submit')
@@ -172,12 +172,13 @@ describe('Hacker Stories', () => {
       })
 
       context('Last searches', () => {
-        it('shows a max of 5 buttons for the last searched terms', () => {
+        it.only('shows a max of 5 buttons for the last searched terms', () => {
           const faker = require('faker')
 
           cy.intercept(
             'GET',
-            '**/search**'
+            '**/search**',
+            { fixture: 'empty'}
           ).as('getRandomStories')
 
           Cypress._.times(6, () => {
