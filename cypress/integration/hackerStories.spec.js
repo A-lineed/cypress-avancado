@@ -3,7 +3,7 @@ describe('Hacker Stories', () => {
   const initialTerm = 'React'
   const newTerm = 'Cypress'
 
-  context('Hitting the real API', () => {
+  context.only('Hitting the real API', () => {
 
     beforeEach(() => {
       cy.intercept({
@@ -65,6 +65,10 @@ describe('Hacker Stories', () => {
       cy.get(`button:contains(${newTerm})`)
         .should('be.visible')
     })
+
+  })
+
+  context('Mocking the API', () => {
 
   })
 
