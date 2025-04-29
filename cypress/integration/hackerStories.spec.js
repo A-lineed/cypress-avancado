@@ -275,7 +275,7 @@ describe('Hacker Stories', () => {
 
         it('types and submits the form directly', () => {
 
-          
+
           cy.get('#search').type(newTerm)
 
           cy.get('form').submit()
@@ -286,7 +286,7 @@ describe('Hacker Stories', () => {
         })
 
         context('Last searches', () => {
-          it('shows a max of 5 buttons for the last searched terms', () => {
+          it.only('shows a max of 5 buttons for the last searched terms', () => {
             const faker = require('faker')
 
             cy.intercept(
@@ -302,8 +302,13 @@ describe('Hacker Stories', () => {
               cy.wait('@getRandomStories')
             })
 
-            cy.get('.last-searches button')
-              .should('have.length', 5)
+            //cy.get('.last-searches button')
+            // .should('have.length', 5)
+
+            cy.get('.last-searches') // a partir do elemento que tem essa classe, encontre todos os botões
+              .within(() => {
+                cy.get('button').should('have.length', 5) 
+              })
           })
         })
       })
